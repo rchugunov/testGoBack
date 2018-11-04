@@ -2,6 +2,7 @@
   "name": "testGoBack",
   "scripts": {
   },
+  "stack": "heroku-18",
   "env": {
   },
   "formation": {
