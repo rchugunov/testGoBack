@@ -1,6 +1,7 @@
 package main
 
 import (
+	"com/github/rchugunov/awesomeProject/events"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/russross/blackfriday.v2"
@@ -22,6 +23,18 @@ func main() {
 	router.GET("/mark", func(c *gin.Context) {
 		c.String(http.StatusOK, string(blackfriday.Run([]byte("**hi!**"))))
 	})
+	api := router.Group("/api")
+	{
+		api.GET("/event", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "pong",
+			})
+		})
+
+		api.GET("/events", func(c *gin.Context) {
+			events.TestEvent(c)
+		})
+	}
 
 	router.Run(":" + port)
 }
